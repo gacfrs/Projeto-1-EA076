@@ -16,15 +16,15 @@
 ** ###################################################################*/
         
 
-/*	##########################################################################
+/* ##########################################################################
  * 	EA076 C - Projeto 1 - Events.c
  * 	Dimitri Reis			RA 145869
  * 	Guilherme Frauches	RA 155591
  *
- *  O programa simula um sem·foro inteligente com sensor de luminosidade
- *  e detecÁ„o de pedestres.
+ *  O programa simula um sem√°foro inteligente com sensor de luminosidade
+ *  e detec√ß√£o de pedestres.
  * 
- *	##########################################################################*/
+ * ##########################################################################*/
 
 /* MODULE Events */
 
@@ -35,14 +35,14 @@
 extern "C" {
 #endif 
 
-/* Link das vari·veis de controle do tempo*/
+/* Link das vari√°veis de controle do tempo*/
 extern int cont;
 extern int cont_max;
 
-/* Link das vari·veis de controle dos perifÈricos */
+/* Link das vari√°veis de controle dos perif√©ricos */
 extern int button;
 extern int noite;
-uint8_t conversor;				// Vari·vel de 8 bits que ir· operar como ADC
+uint8_t conversor;			// Vari√°vel de 8 bits que ir√° operar como ADC
 
 /*
 ** ===================================================================
@@ -57,8 +57,7 @@ uint8_t conversor;				// Vari·vel de 8 bits que ir· operar como ADC
 **         interrupt] property is set to 'Enabled'.
 */
 /* ===================================================================*/
-void Cpu_OnNMIINT(void)
-{
+void Cpu_OnNMIINT(void){
 }
 
 /*
@@ -77,9 +76,9 @@ void Cpu_OnNMIINT(void)
 */
 
 void TI1_OnInterrupt(void){ 
-	AD1_Measure(FALSE);			// Faz a leitura do LDR e pula para rotina AD1_OnEnd
-	button = BUTTON_GetVal();	// Verifica o estaedo do bot„o (1 - pressionado, 0 - c.c.)
-	cont++;						// Faz a contagem do tempo
+	AD1_Measure(FALSE);		// Faz a leitura do LDR e pula para rotina AD1_OnEnd
+	button = BUTTON_GetVal();	// Verifica o estaedo do bot√£o (1 - pressionado, 0 - c.c.)
+	cont++;				// Faz a contagem do tempo
 
 	if (cont >= cont_max)		// Reinicia o ciclo do contador
 		cont = 0;
@@ -101,10 +100,10 @@ void TI1_OnInterrupt(void){
 */
 void AD1_OnEnd(void){
 	AD1_GetValue8(&conversor);	// Converte o valor do LDR em 8 bits
-	if(conversor>128)			// Define o estado da vari·vel "noite"
-		noite=1;				// 1 - Escuro
+	if(conversor>128)		// Define o estado da vari√°vel "noite"
+		noite=1;		// 1 - Escuro
 	else
-		noite=0;				// 0 - Claro
+		noite=0;		// 0 - Claro
 }
 
 /*
@@ -121,10 +120,9 @@ void AD1_OnEnd(void){
 **     Returns     : Nothing
 ** ===================================================================
 */
-void AD1_OnCalibrationEnd(void)
-{
+void AD1_OnCalibrationEnd(void){
 }
-	/* END Events */
+/* END Events */
 
 #ifdef __cplusplus
 }  /* extern "C" */
