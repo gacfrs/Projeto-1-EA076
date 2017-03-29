@@ -20,25 +20,20 @@
  **         Main module.
  **         This module contains user's application code.
  */         
-/*!
- **  @addtogroup main_module main module documentation
- **  @{
- */         
+  
 /* MODULE main */
 
-/*	##########################################################################
+/*##########################################################################
  * 	EA076 C - Projeto 1 - main.c
  * 	Dimitri Reis			RA 145869
  * 	Guilherme Frauches	RA 155591
  *
- *   O programa simula um semáforo inteligente com leds, sensor de luminosidade
- *  detecção de pedestres.
- *  
- *   
+ *  O programa simula um semÃ¡foro inteligente com leds, sensor de luminosidade
+ *  e detecÃ§Ã£o de pedestres.
  * 
- *	##########################################################################*/
+ *##########################################################################*/
 
-/* Inlcusão de módulos necessários para compilar o projeto */
+/* InlcusÃ£o de mÃ³dulos necessÃ¡rios para compilar o projeto */
 #include "Cpu.h"
 #include "Events.h"
 #include "LED_red_car.h"
@@ -57,20 +52,20 @@
 #include "BUTTON.h"
 #include "BitIoLdd8.h"
 
-/* Inclusão de módulos compartilhados usados no projeto */
+/* InclusÃ£o de mÃ³dulos compartilhados usados no projeto */
 #include "PE_Types.h"
 #include "PE_Error.h"
 #include "PE_Const.h"
 #include "IO_Map.h"
 
-/* Variáveis de controle do tempo*/
+/* VariÃ¡veis de controle do tempo */
 int cont = 0;
 int cont_green = 16;
 int cont_yellow = 22;
 int cont_max = 38;
 int cont_blink = 4;
 
-/* Variáveis de controle dos periféricos */
+/* VariÃ¡veis de controle dos perifÃ©ricos */
 int button;
 int noite;
 
@@ -80,19 +75,19 @@ int main(void){
 	/*** End of Processor Expert internal initialization. ***/
 
 	for(;;){
-		while(noite){						// Verifica se deve operar no modo noturno
+		while(noite){					// Verifica se deve operar no modo noturno
 			LED_red_car_ClrVal();			// Apaga todos os LEDs
 			LED_green_car_ClrVal();
 			LED_red_man_ClrVal();
 			LED_green_man_ClrVal();
 
-			if(!(cont%2))					// Pisca o LED amarelo
+			if(!(cont%2))				// Pisca o LED amarelo
 				LED_yellow_car_ClrVal();
 			if(cont%2)
 				LED_yellow_car_SetVal();
 		}
 
-		if(cont<cont_green){				// Período do LED verde dos carros
+		if(cont<cont_green){				// PerÃ­odo do LED verde dos carros
 			LED_red_car_ClrVal();			// Somente seta o LED verde dos carros e o LED vermelho dos pedestres
 			LED_yellow_car_ClrVal();
 			LED_green_car_SetVal();
@@ -100,26 +95,26 @@ int main(void){
 			LED_green_man_ClrVal();
 
 			if(button)
-				cont=cont_green-2;			// Aproxima o contador para o fim do período do LED verde dos carros
+				cont=cont_green-2;		// Aproxima o contador para o fim do perÃ­odo do LED verde dos carros
 		}
-		else if(cont<cont_yellow){			// Período do LED amarelo dos carros
+		else if(cont<cont_yellow){			// PerÃ­odo do LED amarelo dos carros
 			LED_red_car_ClrVal();			// Somente seta o LED amarelo e o LED vermelho dos pedestres
 			LED_yellow_car_SetVal(); 	 			 
 			LED_green_car_ClrVal();
 			LED_red_man_SetVal();
 			LED_green_man_ClrVal();
 		}
-		else if(cont<cont_max-cont_blink){ 	// Período do LED vermelho dos carros
+		else if(cont<cont_max-cont_blink){ 		// PerÃ­odo do LED vermelho dos carros
 			LED_red_car_SetVal();			// Somente seta o LED vermelho dos carros e o LED verde dos pedestres
 			LED_yellow_car_ClrVal(); 	 			 
 			LED_green_car_ClrVal();
 			LED_red_man_ClrVal();
 			LED_green_man_SetVal();
 		}
-		else{								// Últimos instantes do LED vermelho dos carros
+		else{						// Ãšltimos instantes do LED vermelho dos carros
 			LED_green_man_ClrVal();			// Somente seta o LED vermelho dos carros
 			
-			if(!(cont%2))					// Pisca o LED vermelho dos pedestres
+			if(!(cont%2))				// Pisca o LED vermelho dos pedestres
 				LED_red_man_ClrVal();
 			if(cont%2)
 				LED_red_man_SetVal();
@@ -133,7 +128,7 @@ int main(void){
 	/*** End of RTOS startup code.  ***/
 	/*** Processor Expert end of main routine. DON'T MODIFY THIS CODE!!! ***/
 
-} //********************************end main********************************************/
+} /*** END OF MAIN ***/
 
 /*
  ** ###################################################################
